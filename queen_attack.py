@@ -52,36 +52,34 @@ class QueenAttack:
     def setting_positions(var):
         table = []
         for i in range(int(var[0][0])):
-            table.append([0] * int(var[0][0]))
+            table.append([''] * int(var[0][0]))
 
         if int(var[0][1]) != 0:
             for i in range(2, int(var[0][1]) + 2):
                 table[int(var[i][0]) - 1][int(var[i][1]) - 1] = 'X'
-        table[int(var[1][0]) - 1][int(var[1][1]) - 1] = 'R'
+        table[int(var[1][0]) - 1][int(var[1][1]) - 1] = 'Q'
         return table
 
-    def movement(self, x, y, queen_x, queen_y, output):
-        queen_x = queen_x + x
-        queen_y = queen_y + y
-        if self.board_size > queen_y >= 0 and self.board_size > queen_x >= 0:
-            if self.board[queen_x][queen_y] == 0:
-                output += 1
-                crazy = self.movement(x, y, queen_x, queen_y, output)
-                return crazy
+    def queen_attack_validation(self, queen_file, queen_column, move, count):
+        queen_file = queen_file + move[0]
+        queen_column = queen_column + move[1]
+        if self.board_size - 1 >= queen_file >= 0 and self.board_size - 1 >= queen_column >= 0:
+            if self.board[queen_file][queen_column] != 'X':
+                self.board[queen_file][queen_column] = 'o'
+                count += 1
+                return self.queen_attack_validation(queen_file, queen_column, move, count)
             else:
-                return output
+                return count
         else:
-            return output
+            return count
 
-    def counter_calculator(self):
-        output = 0
-        list_of_vectors = [[1, 0], [0, 1], [1, 1], [1, -1], [-1, -1], [-1, 1], [0, -1], [-1, 0]]
-        for vector in list_of_vectors:
-            temp = 0
-            temp = self.movement(vector[0], vector[1], self.queen_location[0], self.queen_location[1], temp)
-            if temp is not None:
-                output += temp
-        return output
+    def queen_position_validation(self):
+        q_move = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
+        count = 0
+        for move in q_move:
+            tem = self.queen_attack_validation(self.queen_location[0], self.queen_location[1], move, 0)
+            count += tem
+        return count
 
     @staticmethod
     def print_board(var, board):
@@ -105,7 +103,7 @@ class QueenAttack:
             input_data = self.validate_file()
             if input_data is not None:
                 self.board = self.setting_positions(input_data)
-                output = self.counter_calculator()
+                output = self.queen_position_validation()
                 self.print_board(input_data, self.board)
                 return "\n Queen's possible movements = {}".format(output)
 
