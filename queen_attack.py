@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """QueenAttack docstrings.
 
 This module demonstrates documentation as specified by the LSV seedbed.
@@ -26,7 +25,7 @@ class QueenAttack:
     def read_file(self):
         """ Read a file.
 
-            Parameters:
+            Params:
                 None.
 
             Returns:
@@ -43,7 +42,7 @@ class QueenAttack:
     def validate_file(self):
         """ Validate that a file is correct, set the queen's position on the board and set the size of the board.
 
-            Parameters:
+            Params:
                 None.
 
             Returns:
@@ -95,7 +94,7 @@ class QueenAttack:
            and the positions of the obstacles to iterate with these.
 
 
-            Parameters:
+            Params:
                 var(list):
                     list with the size of the board, amount of obstacles,
                     the Queen's position and the obstacles positions.
@@ -119,7 +118,7 @@ class QueenAttack:
     def queen_attack_validation(self, queen_row, queen_column, move, count):
         """Calculate the possible movements of the queen on the board, move the queen across the board
            and validates that the queen does not leave the board.
-            Parameters:
+            Params:
                 queen_row (int): The row in which the queen will be.
                 queen_column(int): The column in which the queen will be.
                 move(list): A list with the movement that the queen will make.
@@ -144,7 +143,7 @@ class QueenAttack:
         """Generate the Queen's moves and calculate the possible movements of the queen on the board.
 
 
-            Parameters:
+            Params:
                 None.
 
             Returns:
@@ -162,7 +161,7 @@ class QueenAttack:
         """Generate the board to show it on the screen.
 
 
-            Parameters:
+            Params:
                 var(list):
                     list with the size of the board, amount of obstacles,
                     the Queen's position and the obstacles positions.
@@ -192,7 +191,7 @@ class QueenAttack:
     def main(self):
         """The main method of the QueenAttack class.
 
-            Parameters:
+            Params:
                 None.
 
             Returns:
