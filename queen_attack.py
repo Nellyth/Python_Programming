@@ -56,11 +56,11 @@ class QueenAttack:
         for line in self.file.readlines():
             line = line.replace("\n", "")
             var.append(line.split(' '))
-        if var[0][1].isnumeric() or var[0][0].isnumeric():
+        if var[0][1].isnumeric() and var[0][0].isnumeric() and var[1][0].isnumeric() and var[1][1].isnumeric():
             if len(var) != int(var[0][1]) + 2:
                 print('The file does not have the necessary lines')
                 return None
-            if int(var[0][0])>990:
+            elif int(var[0][0])>990:
                 print('The maximum size of the matrix is ​​990 * 990')
                 return None
         else:
@@ -71,13 +71,14 @@ class QueenAttack:
             if len(item) != 2:
                 print('The lines have to contain two data, separated by a space')
                 return None
-            if not item[0].isnumeric() or not item[1].isnumeric():
+            elif not item[0].isnumeric() or not item[1].isnumeric():
                 print('All data must be numeric')
                 return None
-            if int(item[0]) > int(var[0][0]) or int(item[0]) < 1 or int(item[1]) > int(var[0][0]) or int(item[1]) < 1:
-                print('The data can not be less than 1 or the maximum number of the assigned table')
-                return None
-            if enter > 1:
+            elif enter > 0:
+                if int(item[0]) > int(var[0][0]) or int(item[0]) < 1 or int(item[1]) > int(var[0][0]) or int(item[1]) < 1:
+                    print('The data can not be less than 1 or the maximum number of the assigned table')
+                    return None
+            elif enter > 1:
                 if var[1][0] == item[0] and var[1][1] == item[1]:
                     print('The position of the queen can not be repeated')
                     return None
