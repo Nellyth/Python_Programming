@@ -1,4 +1,3 @@
-
 class QueenAttack:
 
     def __init__(self):
