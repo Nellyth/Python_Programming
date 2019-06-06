@@ -1,12 +1,38 @@
+# -*- coding: utf-8 -*-
+"""QueenAttack docstrings.
+
+This module demonstrates documentation as specified by the LSV seedbed.
+
+"""
+
+
 class QueenAttack:
 
+    """
+    This is the model of the class.
+
+    """
+
     def __init__(self):
+        """
+        This is the contructor of the class.
+
+        """
         self.file = None
         self.queen_location = ()
         self.board = []
         self.board_size = None
 
     def read_file(self):
+        """ Read a file.
+
+            Parameters:
+                None.
+
+            Returns:
+                file: The file with the data to run the QueenAttack.
+
+        """
         try:
             self.file = open('data.txt')
             return self.file
@@ -15,6 +41,17 @@ class QueenAttack:
             return None
 
     def validate_file(self):
+        """ Validate that a file is correct, set the queen's position on the board and set the size of the board.
+
+            Parameters:
+                None.
+
+            Returns:
+                list: list with the size of the board, amount of obstacles,
+                      the Queen's position and the obstacles positions.
+
+        """
+
         var = []
         for line in self.file.readlines():
             line = line.replace("\n", "")
@@ -50,6 +87,21 @@ class QueenAttack:
 
     @staticmethod
     def setting_positions(var):
+        """Generate the board with the position of the queen
+           and the positions of the obstacles to iterate with these.
+
+
+            Parameters:
+                var(list):
+                    list with the size of the board, amount of obstacles,
+                    the Queen's position and the obstacles positions.
+
+
+
+            Returns:
+                list[list[str]]: The board with the position of the queen
+                      and the positions of the obstacles to iterate with these.
+        """
         table = []
         for i in range(int(var[0][0])):
             table.append([''] * int(var[0][0]))
@@ -60,20 +112,40 @@ class QueenAttack:
         table[int(var[1][0]) - 1][int(var[1][1]) - 1] = 'Q'
         return table
 
-    def queen_attack_validation(self, queen_file, queen_column, move, count):
-        queen_file = queen_file + move[0]
+    def queen_attack_validation(self, queen_row, queen_column, move, count):
+        """Calculate the possible movements of the queen on the board, move the queen across the board
+           and validates that the queen does not leave the board.
+            Parameters:
+                queen_row (int): The row in which the queen will be.
+                queen_column(int): The column in which the queen will be.
+                move(list): A list with the movement that the queen will make.
+                count(int): The possible movements of the queen.
+
+            Returns:
+                int: The int the which contain the posibles Queen's moves.
+        """
+        queen_row = queen_row + move[0]
         queen_column = queen_column + move[1]
-        if self.board_size - 1 >= queen_file >= 0 and self.board_size - 1 >= queen_column >= 0:
-            if self.board[queen_file][queen_column] != 'X':
-                self.board[queen_file][queen_column] = 'o'
+        if self.board_size - 1 >= queen_row >= 0 and self.board_size - 1 >= queen_column >= 0:
+            if self.board[queen_row][queen_column] != 'X':
+                self.board[queen_row][queen_column] = 'o'
                 count += 1
-                return self.queen_attack_validation(queen_file, queen_column, move, count)
+                return self.queen_attack_validation(queen_row, queen_column, move, count)
             else:
                 return count
         else:
             return count
 
     def queen_position_validation(self):
+        """Generate the Queen's moves and calculate the possible movements of the queen on the board.
+
+
+            Parameters:
+                None.
+
+            Returns:
+                int: The int the which contain the posibles Queen's moves.
+        """
         q_move = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
         count = 0
         for move in q_move:
@@ -83,6 +155,22 @@ class QueenAttack:
 
     @staticmethod
     def print_board(var, board):
+        """Generate the board to show it on the screen.
+
+
+            Parameters:
+                var(list):
+                    list with the size of the board, amount of obstacles,
+                    the Queen's position and the obstacles positions.
+                board(list[list[str]]):
+                    The board with the position of the queen
+                    and the positions of the obstacles to iterate with these.
+
+
+
+            Returns:
+                None.
+        """
         for loop in range(int(var[0][0])):
             print("\n")
             for j in range(int(var[0][0])):
@@ -98,6 +186,14 @@ class QueenAttack:
             print("|", end="")
 
     def main(self):
+        """The main method of the QueenAttack class.
+
+            Parameters:
+                None.
+
+            Returns:
+                str: Returns a string with the Queen's possible movements.
+        """
         self.file = self.read_file()
         if self.file is not None:
             input_data = self.validate_file()
