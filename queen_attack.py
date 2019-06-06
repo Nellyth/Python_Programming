@@ -56,9 +56,12 @@ class QueenAttack:
         for line in self.file.readlines():
             line = line.replace("\n", "")
             var.append(line.split(' '))
-        if var[0][1].isnumeric():
+        if var[0][1].isnumeric() or var[0][0].isnumeric():
             if len(var) != int(var[0][1]) + 2:
                 print('The file does not have the necessary lines')
+                return None
+            if int(var[0][0])>990:
+                print('The maximum size of the matrix is ​​990 * 990')
                 return None
         else:
             print('Only Accept numeric data')
