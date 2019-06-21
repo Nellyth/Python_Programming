@@ -9,9 +9,6 @@ class DummyTest(TestCase):
         assert self.data.main('asd')
         print(self.data.main('asd'))
 
-    def test_the_returned_value_must_be_an_integer(self):
-        assert self.data.main(99).isnumeric()
-
     def test_can_not_enter_a_null_value(self):
         assert self.data.main(None)
         print(self.data.main(None))
